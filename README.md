@@ -1,0 +1,1 @@
+# AutomatisationProduction_CHARPENTIER_ZOTT_PrivateBIN
