@@ -1,1 +1,4 @@
 # AutomatisationProduction_CHARPENTIER_ZOTT_PrivateBIN
+
+Thomas CHARPENTIER
+Alexis ZOTT
