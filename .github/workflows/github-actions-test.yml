@@ -1,6 +1,8 @@
 name: GitHub Actions Test
 run-name: ${{ github.actor }} a lancé les tests sur PrivateBin 🚀
-on: [push]
+on: 
+  push:
+  pull-request:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
