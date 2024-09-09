@@ -9,9 +9,9 @@ jobs:
       - name: Installation de Composer
         uses: php-actions/composer@v6
         with:
-            working-directory: ./PrivateBin-main
+            working_dir: ./PrivateBin-main
       - name: Essaie des tests
         uses: php-actions/phpunit@v3
         with:
-            working-directory: ./PrivateBin-main
+            working_dir: ./PrivateBin-main
       - run: cd PrivateBin-main/ && make test
