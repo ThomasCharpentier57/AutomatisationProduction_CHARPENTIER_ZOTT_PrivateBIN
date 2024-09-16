@@ -14,3 +14,4 @@ jobs:
         uses: php-actions/phpunit@v3
         with:
           php_extensions: gd mbstring sqlite3 simplexml xdebug
+          configuration: phpunit.xml
