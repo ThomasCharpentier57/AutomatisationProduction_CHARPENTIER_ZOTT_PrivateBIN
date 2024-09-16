@@ -15,3 +15,4 @@ jobs:
         with:
           php_extensions: gd mbstring sqlite3 simplexml xdebug
           configuration: ./phpunit.xml
+          bootstrap: /tst/Bootstrap.php
