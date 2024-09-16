@@ -12,3 +12,5 @@ jobs:
         uses: php-actions/composer@v6
       - name: Essaie des tests
         uses: php-actions/phpunit@v3
+        with:
+          php_extensions: gd
