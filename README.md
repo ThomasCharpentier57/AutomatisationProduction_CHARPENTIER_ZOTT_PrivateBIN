@@ -49,7 +49,7 @@ with:
 ```
 
 L'action complète : 
-
+```
 name: GitHub Actions Test
 
 run-name: ${{ github.actor }} a lancé les tests sur PrivateBin 🚀
@@ -71,3 +71,4 @@ jobs:
           php_extensions: gd mbstring sqlite3 simplexml xdebug
           configuration: ./phpunit.xml
           bootstrap: ./tst/Bootstrap.php
+```
