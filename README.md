@@ -3,7 +3,7 @@
 Thomas CHARPENTIER
 Alexis ZOTT
 
-L'action ci dessus marche de cette façon :
+L'action ci-dessous marche de cette façon :
 
 Le nom de notre action github
 ```
@@ -17,7 +17,7 @@ on:
   pull_request:
 ```
 
-Le "job" c'est à dire le déroulement d'action que github vas effectuer a chaque push ou pull
+Le **job** c'est à dire le déroulement d'action que github vas effectuer a chaque push ou pull
 L'action se lance sur ubuntu
 ```
 jobs:
@@ -26,8 +26,9 @@ jobs:
     steps:
 ```
 
-Les différentes étapes, on se dirigie sur la branch action pour lancer l'action.
-On nomme les etapes, installe et on lance composer et phpunit pour pouvoir utiliser php
+Utilisation de l'action actions/checkout@v3 pour récupérer le code source sur la branche en cours.
+Installation de Composer : Utilisation de l'action php-actions/composer@v6 pour installer Composer.
+Exécution des tests avec PHPUnit : Utilisation de l'action php-actions/phpunit@v3 pour exécuter les tests unitaires PHP.
 ```
 steps:
   - uses: actions/checkout@v3
