@@ -26,8 +26,9 @@ jobs:
     steps:
 ```
 
-Les différentes étapes, on se dirigie sur la branch **action** pour lancer l'action.
-On nomme les etapes, installe et lance composer et phpunit pour pouvoir utiliser php
+Utilisation de l'action actions/checkout@v3 pour récupérer le code source sur la branche en cours.
+Installation de Composer : Utilisation de l'action php-actions/composer@v6 pour installer Composer.
+Exécution des tests avec PHPUnit : Utilisation de l'action php-actions/phpunit@v3 pour exécuter les tests unitaires PHP.
 ```
 steps:
   - uses: actions/checkout@v3
