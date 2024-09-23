@@ -3,13 +3,13 @@
 Thomas CHARPENTIER
 Alexis ZOTT
 
-                                                                    //Le nom de notre action github
+//Le nom de notre action github
 name: GitHub Actions Test
 
 
 run-name: ${{ github.actor }} a lancé les tests sur PrivateBin 🚀
 
-                                                                    //On lance on l'action quand on pull ou qu'on push
+//On lance on l'action quand on pull ou qu'on push
 on: 
   push:
   pull_request:
