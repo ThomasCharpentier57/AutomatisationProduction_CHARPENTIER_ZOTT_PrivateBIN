@@ -16,3 +16,5 @@ jobs:
           php_extensions: gd mbstring sqlite3 simplexml xdebug
           configuration: ./phpunit.xml
           bootstrap: ./tst/Bootstrap.php
+          version: 9
+          php_version: 8.1
