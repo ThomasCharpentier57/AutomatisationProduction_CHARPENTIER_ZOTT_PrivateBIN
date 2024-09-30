@@ -32,3 +32,10 @@ jobs:
           hide_complexity: true
           indicators: true
           output: both
+
+      - name: PHP Code Sniffer
+        uses: php-actions/phpcs@v1
+        with:
+          configuration: ./phpcs.xml
+          version: 9
+          php_version: 8.1
