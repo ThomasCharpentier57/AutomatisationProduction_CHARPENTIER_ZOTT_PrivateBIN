@@ -14,7 +14,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          exclude: "[**/vendor/**]"
+          exclude: "[vendor/**]"
           server: ${{ secrets.URL }}
           username: ${{ secrets.LOGIN }}
           password: ${{ secrets.MDP_FTP }}
