@@ -50,3 +50,10 @@ jobs:
           path: lib/
           output: text
           ruleset: cleancode
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.URL }}
+          username: ${{ secrets.LOGIN }}
+          password: ${{ secrets.MDP_FTP }}
