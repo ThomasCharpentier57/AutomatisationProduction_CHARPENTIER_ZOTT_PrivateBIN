@@ -8,6 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: php-actions/phpstan@v3
+        with:
+          path: lib/
+      - name: Essaie des tests
+        uses: php-actions/phpunit@v3
+        env:
+          XDEBUG_MODE: coverage
+        with:
+          php_extensions: gd xdebug
+          configuration: ./phpunit.xml
+          bootstrap: ./tst/Bootstrap.php
+          version: 9
+          php_version: 8.1
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

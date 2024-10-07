@@ -57,3 +57,11 @@ jobs:
           server: ${{ secrets.URL }}
           username: ${{ secrets.LOGIN }}
           password: ${{ secrets.MDP_FTP }}
+
+
+
+
+
+
+
+Si on enlève le composer, cela marche car le fichier vendor et déjà sur le serveur FTP
