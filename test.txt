@@ -23,7 +23,6 @@ jobs:
           bootstrap: ./tst/Bootstrap.php
           version: 9
           php_version: 8.1
-	continue-on-error: true
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
@@ -36,7 +35,6 @@ jobs:
           hide_complexity: true
           indicators: true
           output: both
-	continue-on-error: true
 
       - name: PHP Code Sniffer
         uses: php-actions/phpcs@v1
@@ -44,7 +42,6 @@ jobs:
           php_version: 8.1
           path: lib/
           standard: PSR12
-	continue-on-error: true
 
       - name: PHP Mess Detector
         uses: php-actions/phpmd@v1
@@ -53,7 +50,6 @@ jobs:
           path: lib/
           output: text
           ruleset: cleancode
-	continue-on-error: true
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
