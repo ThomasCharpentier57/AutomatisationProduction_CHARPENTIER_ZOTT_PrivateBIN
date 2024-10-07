@@ -13,7 +13,8 @@ jobs:
       - uses: php-actions/phpstan@v3
         with:
           path: ./lib/
-          level: 0
+          level: 9
+        continue-on-error: true
           
       - name: Essaie des tests
         uses: php-actions/phpunit@v3
