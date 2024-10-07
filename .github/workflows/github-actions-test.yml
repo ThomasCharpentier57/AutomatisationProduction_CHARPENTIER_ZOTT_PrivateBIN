@@ -21,3 +21,4 @@ jobs:
           server: ${{ secrets.URL }}
           username: ${{ secrets.LOGIN }}
           password: ${{ secrets.MDP_FTP }}
+          
