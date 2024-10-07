@@ -9,12 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
-      - name: PhpStan
       - uses: php-actions/phpstan@v3
         with:
           path: lib/
           level: 1
-          php_version: 8.1
       - name: Essaie des tests
         uses: php-actions/phpunit@v3
         env:
