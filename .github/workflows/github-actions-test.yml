@@ -13,6 +13,7 @@ jobs:
       - uses: php-actions/phpstan@v3
         with:
           path: ./lib/
+          level: 0
           
       - name: Essaie des tests
         uses: php-actions/phpunit@v3
