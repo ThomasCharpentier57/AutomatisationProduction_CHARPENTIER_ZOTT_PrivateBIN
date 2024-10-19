@@ -35,7 +35,6 @@ jobs:
         continue-on-error: true
 
 
-
       - name: PHP Code Sniffer
         uses: php-actions/phpcs@v1
         with:
@@ -59,10 +58,12 @@ jobs:
           level: 9
         continue-on-error: true  
 
-      - name: 📂 Sync files
+      - name: 📂 Deploiement sur le FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server-dir: 'www/'
           server: ${{ secrets.URL }}
           username: ${{ secrets.LOGIN }}
           password: ${{ secrets.MDP_FTP }}
+        continue-on-error: true
+
