@@ -54,7 +54,7 @@ jobs:
 
       - uses: php-actions/phpstan@v3
         with:
-          path: ./lib/
+          path: lib/
           level: 9
         continue-on-error: true  
 
