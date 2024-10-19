@@ -10,12 +10,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
 
-      - uses: php-actions/phpstan@v3
-        with:
-          path: ./lib/
-          level: 9
-        continue-on-error: true
-          
       - name: Essaie des tests
         uses: php-actions/phpunit@v3
         env:
@@ -40,6 +34,8 @@ jobs:
           output: both
         continue-on-error: true
 
+
+
       - name: PHP Code Sniffer
         uses: php-actions/phpcs@v1
         with:
@@ -56,6 +52,12 @@ jobs:
           output: text
           ruleset: cleancode
         continue-on-error: true
+
+      - uses: php-actions/phpstan@v3
+        with:
+          path: ./lib/
+          level: 9
+        continue-on-error: true  
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
