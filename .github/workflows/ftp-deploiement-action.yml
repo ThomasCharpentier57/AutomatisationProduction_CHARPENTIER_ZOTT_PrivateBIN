@@ -1,0 +1,21 @@
+name: FTP Deploiement
+run-name: ${{ github.actor }} a déployé sur le FTP 🚀
+on:
+  push:
+  pull_request:
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6
+
+      - name: 📂 Deploiement sur le FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server-dir: 'www/'
+          server: ${{ secrets.URL }}
+          username: ${{ secrets.LOGIN }}
+          password: ${{ secrets.MDP_FTP }}
+        continue-on-error: true
+

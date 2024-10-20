@@ -1,4 +1,4 @@
-name: GitHub Actions Test
+name: PHP Actions
 run-name: ${{ github.actor }} a lancé les tests sur PrivateBin 🚀
 on:
   push:
@@ -57,13 +57,4 @@ jobs:
           path: lib/
           level: 9
         continue-on-error: true  
-
-      - name: 📂 Deploiement sur le FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server-dir: 'www/'
-          server: ${{ secrets.URL }}
-          username: ${{ secrets.LOGIN }}
-          password: ${{ secrets.MDP_FTP }}
-        continue-on-error: true
 
