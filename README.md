@@ -26,50 +26,113 @@ jobs:
     steps:
 ```
 
-Utilisation de l'action actions/checkout@v3 pour récupérer le code source sur la branche en cours.
-Installation de Composer : Utilisation de l'action php-actions/composer@v6 pour installer Composer.
-Exécution des tests avec PHPUnit : Utilisation de l'action php-actions/phpunit@v3 pour exécuter les tests unitaires PHP.
+Utilisation de l'action actions/checkout@v3 pour récupérer le code sur la branche en cours.
+
 ```
-steps:
   - uses: actions/checkout@v3
+```
+
+Installation de Composer : Utilisation de l'action php-actions/composer@v6 pour installer Composer.
+
+```
   - name: Installation de Composer
       uses: php-actions/composer@v6
-  - name: Essaie des tests
-      uses: php-actions/phpunit@v3
 ```
 
-Les paramètres pour phpunit.
-On utilises certaines extensions pour que les tests fonctionnent.
-Fichier de configuration pour phpunit
-Fichier bootstrap pour éviter les failures (qui ne marche pas)
+Exécution des tests avec PHPUnit : Utilisation de l'action php-actions/phpunit@v3 pour exécuter les tests unitaires PHP.
+
+On renseigne certains paramètres : 
+- le fichier de configuration pour phpunit
+- Fichier bootstrap pour éviter les failures (qui ne marche pas)
+- La version de phpunit
+- La version de php
+- Les extensions utilisés dans le projet
+
+On définie aussi l'environement XDEBUG pour définir par la suite le coverage.
 ```
-with:
-  php_extensions: gd mbstring sqlite3 simplexml xdebug
-  configuration: ./phpunit.xml
-  bootstrap: ./tst/Bootstrap.php
-```
-
-L'action complète : 
-```
-name: GitHub Actions Test
-
-run-name: ${{ github.actor }} a lancé les tests sur PrivateBin 🚀
-
-on: 
-  push:
-  pull_request:
-
-jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Installation de Composer
-        uses: php-actions/composer@v6
-      - name: Essaie des tests
+- name: Essaie des tests
         uses: php-actions/phpunit@v3
+        env:
+          XDEBUG_MODE: coverage
         with:
-          php_extensions: gd mbstring sqlite3 simplexml xdebug
+          php_extensions: gd xdebug
           configuration: ./phpunit.xml
           bootstrap: ./tst/Bootstrap.php
+          version: 9
+          php_version: 8.1
 ```
+On s'occupe ensuite du rapport de Code Coverage. On utilise l'action ci dessous.
+On renseigne différents paramètres : 
+- le format
+- l'emplacement du rapport
+
+On a du modifier la configuration de phpunit pour modifier le type du rapport pour le passer en cobertura étant donné que l'action github ne supporte que ce format là.
+
+```
+- name: Code Coverage Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: log/coverage-cobertura.xml
+          badge: true
+          fail_below_min: true
+          format: markdown
+          hide_branch_rate: false
+          hide_complexity: true
+          indicators: true
+          output: both
+        continue-on-error: true
+```
+
+```
+ - name: PHP Code Sniffer
+        uses: php-actions/phpcs@v1
+        with:
+          php_version: 8.1
+          path: lib/
+          standard: PSR12
+        continue-on-error: true
+```
+
+```
+ - name: PHP Mess Detector
+        uses: php-actions/phpmd@v1
+        with:
+          php_version: 8.1
+          path: lib/
+          output: text
+          ruleset: cleancode
+        continue-on-error: true
+```
+
+```
+ - uses: php-actions/phpstan@v3
+        with:
+          path: lib/
+          level: 9
+        continue-on-error: true
+```
+
+Ensuite nous avons créé ensuite une 2ème action github. Elle permet de déployer les fichiers sur un serveur FTP. On l'a créé indépendement pour ne pas à avoir à utiliser le composer étant donné que le fichier vendor est déjà présent sur le serveur FTP.
+Pour cela,  il faut :
+- On fait tout de même un checkout pour être sur la bonne branche. 
+- Créer des variables secrètes sur Github afin de ne pas dévoiler le mot de passe, l'url et le login au serveur FTP.
+- On indique où on souhaite stocker sur le serveur FTP les fichiers
+- On renseigne les paramètres de connexion au serveur.
+- Et on exclue le fichier vendor dans le cas où on utilise composer ou si le fichier vendor est aussi pousser sur le dépôt. 
+
+```
+- uses: actions/checkout@v3
+
+- name: 📂 Deploiement sur le FTP
+  uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+  with:
+    server-dir: 'www/'
+    server: ${{ secrets.URL }}
+    username: ${{ secrets.LOGIN }}
+    password: ${{ secrets.MDP_FTP }}
+    exclude: | 
+      **/vendor/**
+    continue-on-error: true
+```
+
+On utilise sur l'ensemble de nos actions des ```continue-on-error: true ``` afin que l'ensemble des actions puissent se dérouler même si il y a une interruption.
