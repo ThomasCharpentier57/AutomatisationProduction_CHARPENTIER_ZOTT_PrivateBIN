@@ -83,6 +83,12 @@ On a du modifier la configuration de phpunit pour modifier le type du rapport po
         continue-on-error: true
 ```
 
+Ensuite on lance l'action code sniffer afin de vérifier que le code conçu respect bien toute les normes de codages.
+On renseigne :
+- la version de php
+- le path des fichiers qu'on veut vérifier
+- la norme qu'on souhaite utiliser
+
 ```
  - name: PHP Code Sniffer
         uses: php-actions/phpcs@v1
@@ -92,6 +98,12 @@ On a du modifier la configuration de phpunit pour modifier le type du rapport po
           standard: PSR12
         continue-on-error: true
 ```
+
+Puis on utilise l'action Mess Detector qui vérifie que le code soit "comprehensible" et qu'il soit propre.
+On renseigne :
+- la version de php
+- le path des fichiers à vérifier
+- comment on veut voir le rapport
 
 ```
  - name: PHP Mess Detector
@@ -103,6 +115,11 @@ On a du modifier la configuration de phpunit pour modifier le type du rapport po
           ruleset: cleancode
         continue-on-error: true
 ```
+
+Enfin on utilise l'action PHP Stan pour vérifier qu'il n'y ait pas de potentiels bugs ou d'incohérence. 
+On renseigne : 
+- le path des fichiers qu'on souhaite analyser
+- la sensibilité de vérification des fichiers.
 
 ```
  - uses: php-actions/phpstan@v3
