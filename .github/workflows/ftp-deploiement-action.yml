@@ -17,5 +17,7 @@ jobs:
           server: ${{ secrets.URL }}
           username: ${{ secrets.LOGIN }}
           password: ${{ secrets.MDP_FTP }}
+          exclude: | 
+            **/vendor/
         continue-on-error: true
 
