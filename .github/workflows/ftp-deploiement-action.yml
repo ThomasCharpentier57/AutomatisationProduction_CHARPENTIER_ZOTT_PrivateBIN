@@ -18,6 +18,6 @@ jobs:
           username: ${{ secrets.LOGIN }}
           password: ${{ secrets.MDP_FTP }}
           exclude: | 
-            **/vendor/
+            **/vendor/**
         continue-on-error: true
 
